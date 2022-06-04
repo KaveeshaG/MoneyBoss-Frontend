@@ -1,10 +1,14 @@
-using MoneyBoss.Models;
+﻿using MonyBoss.Models;
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
-namespace MoneyBoss.Services
+namespace MonyBoss.Services
 {
     public class AuthService
     {
-        private static HttpClient client = new HttpClient();
+        private System.Net.Http.HttpClient client = new HttpClient();
 
         public AuthService()
         {

@@ -1,4 +1,4 @@
-namespace MoneyBoss.Models
+﻿namespace MonyBoss.Models
 {
     public class User
     {

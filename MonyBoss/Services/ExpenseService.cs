@@ -1,6 +1,6 @@
-using MoneyBoss.Models;
+using MonyBoss.Models;
 
-namespace MoneyBoss.Services
+namespace MonyBoss.Services
 {
     public class ExpenseService
     {
@@ -16,9 +16,48 @@ namespace MoneyBoss.Services
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public CreateExpense(Expense expense)
+        public async Task<Expense> CreateExpense(Expense expense)
         {
-            
+            var response = await client.PostAsJsonAsync("", user);
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<Expense>();
+            }
+
+            return null;
+        }
+
+        public async void DeleteExpense(Guid userId, Guid expenseId) 
+        {
+            var response = await client.DeleteAsync($"{userId}/{expenseId}");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<Expense>();
+            }
+
+            return null;
+        }
+
+        public async Task<Expense> GetExpense(Guid userId, Guid expenseId)
+        {
+            var response = await client.GetAsync($"{userId}/{expenseId}");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<Expense>();
+            }
+
+            return null;
+        }
+
+        public async Task<IEnumerable<Expense>> GetExpenses(Guid userId)
+        {
+            var response = await client.GetAsync($"{userId}");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<IEnumerable<Expense>>();
+            }
+
+            return null;
         }
     }
 }
